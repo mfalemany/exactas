@@ -1,0 +1,43 @@
+#encabezado{
+	background-color: #39606F;
+	color: #FFFFFF;
+	padding: 5px 0px 5px 0px;
+	text-align: center;
+}
+form h4{
+	background-color: #CBEBF8;
+	text-align: center;
+	padding: 3px 0px 3px 0px;
+}
+
+#contenedor_error{
+	background-color: #D9534F;
+	border: 2px solid #D43F3A;
+	border-radius: 5px;
+	box-shadow: 1px 1px 5px #555555;
+	color: #FFFFFF;
+	display:none;
+	font-size: 0.9em;
+	margin: 10px auto 0px auto;
+	padding: 4px 10px 4px 10px;
+	text-align: center;
+	width: 80%;
+}
+
+#datos_docente, #datos_catedra{
+	border: 1px solid black;
+}
+.row{
+	margin-bottom: 5px;
+}
+.num_file{
+	background-color: #46895A; 
+	border-radius: 40px;
+	color: #FFFFFF;
+	font-weight: bold;
+	line-height: 1em;
+	margin:0px;
+	padding: 0px 5px 0px 5px;
+
+}
+
