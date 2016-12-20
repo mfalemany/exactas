@@ -35,10 +35,12 @@
 				foreach ($archivos as $indice => $nombre_archivo) {
 					if( ! $this->leer_archivo_resultados($categoria, $nombre_archivo)){
 						echo $this->get_error();
+
 						die;
 					}	
 				}
 			}
+
 			$this->calcular_numero_encuestados();
 		}
 
@@ -217,7 +219,8 @@
 	
 	//proceso los resultados
 	$datos = new ProcesadorResultados();
-	//var_dump($datos);die;
+
+	//var_dump($datos->get_acumulador_opcion());die;
 	//y con los resultados ya procesados, genero el reporte de encuesta
 	$reporte = new ReporteEncuesta($datos);	
 ?>

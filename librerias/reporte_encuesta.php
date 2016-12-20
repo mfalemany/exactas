@@ -1,5 +1,8 @@
 <?php 
 	require_once "fpdf/fpdf.php";
+	include_once "pchart/pChart/pData.class";
+ 	include_once "pchart/pChart/pChart.class";
+
 	class ReporteEncuesta extends FPDF{
 		private $imagen_encabezado;
 
@@ -280,6 +283,8 @@
 			//Se imprime el PDF
 			//$this->Output("D",$datos->get_nombre_elemento().".pdf");
 			$this->Output("F","../temporales/".$datos->get_nombre_elemento().".pdf",TRUE);
+			header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
+			header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Fecha en el pasado
 			header("Location: ../temporales/".$datos->get_nombre_elemento().".pdf");
 			//var_dump($datos);
 		}
@@ -300,15 +305,24 @@
 		}
 
 		private function generar_grafico($acumulador_opcion,$categoria){
-			include_once("pchart/pChart/pData.class");
- 			include_once("pchart/pChart/pChart.class");
+			$opciones = array();
+			$cantidades = array();
+			array_map('unlink', glob("../temporales/*.pdf"));
+			
+			//borro, si existen, los graficos que puedan estar almacenados en el servidor 
+			if(file_exists ( "../temporales/".$categoria.".png" )){
+				unlink ("../temporales/".$categoria.".png");
+			}
+
 			// Definicion de los datos del gráfico 
 			$DataSet = new pData;
 			//obtengo un array con las cantidades
-			
 			foreach ($acumulador_opcion as $opcion => $cantidad) {
-				$opciones[] = $opcion;
-				$cantidades[] = $cantidad;
+				//para que no se muestre en el grafico las preguntas con valor 0%
+				if($cantidad > 1){
+					$opciones[] = $opcion;
+					$cantidades[] = $cantidad;	
+				}
 			}
 			
 			$DataSet->AddPoint($cantidades,"Serie1");
